@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.kidosc.gallery.R;
 import com.kidosc.gallery.presenter.ImageLoaderPresenter;
 import com.kidosc.gallery.utils.Utils;
-import com.kidosc.gallery.R;
 
 import java.util.ArrayList;
 
@@ -24,11 +24,10 @@ public class WallAdapter extends BaseAdapter {
     private ArrayList<String> imagePathList = null;
     private ImageLoaderPresenter mLoader;
 
-    public void refreshList(ArrayList<String> imagePathList){
+    public void refreshList(ArrayList<String> imagePathList) {
         this.imagePathList = imagePathList;
         notifyDataSetChanged();
     }
-
 
     public WallAdapter(Context context, ArrayList<String> imagePathList) {
         this.context = context;
@@ -58,7 +57,7 @@ public class WallAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.photo_wall_item, null);
             holder = new ViewHolder();
-            holder.imageView = (ImageView) convertView.findViewById(R.id.photo_wall_item_photo);
+            holder.imageView = convertView.findViewById(R.id.photo_wall_item_photo);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

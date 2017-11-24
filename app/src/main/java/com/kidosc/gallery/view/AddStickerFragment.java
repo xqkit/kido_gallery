@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 public class AddStickerFragment extends BaseFragment implements View.OnClickListener {
 
     private static final String TAG = AddStickerFragment.class.getSimpleName();
-    private String mSticker;
+    private Integer mSticker;
     /**
      * save stickers list
      */
@@ -47,13 +46,13 @@ public class AddStickerFragment extends BaseFragment implements View.OnClickList
     protected void initView(View view) {
         Bundle bundle = getArguments();
         String photoPath = bundle.getString(Constants.FILE_PATH);
-        mSticker = bundle.getString(Constants.BUNDLE_STICKER);
+        mSticker = bundle.getInt(Constants.BUNDLE_STICKER);
         ImageView imageView = view.findViewById(R.id.iv);
         imageView.setImageURI(Uri.parse(photoPath));
 
         mContentRootView = view.findViewById(R.id.rl);
-        Button deleteBtn = view.findViewById(R.id.delete_btn);
-        Button saveBtn = view.findViewById(R.id.save_btn);
+        ImageView deleteBtn = view.findViewById(R.id.delete_btn);
+        ImageView saveBtn = view.findViewById(R.id.save_btn);
 
         deleteBtn.setOnClickListener(this);
         saveBtn.setOnClickListener(this);
@@ -67,7 +66,7 @@ public class AddStickerFragment extends BaseFragment implements View.OnClickList
 
     private void addStickerView() {
         final StickerView stickerView = new StickerView(getActivity());
-        stickerView.setImageURI(mSticker);
+        stickerView.setImageInt(mSticker);
         stickerView.setOperationListener(new StickerView.OperationListener() {
             @Override
             public void onDeleteClick() {
@@ -126,8 +125,7 @@ public class AddStickerFragment extends BaseFragment implements View.OnClickList
     }
 
     private void generateBitmap() {
-        Bitmap bitmap = Bitmap.createBitmap(mContentRootView.getWidth(),
-                mContentRootView.getHeight()
+        Bitmap bitmap = Bitmap.createBitmap(mContentRootView.getWidth(), mContentRootView.getHeight()
                 , Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         mContentRootView.draw(canvas);

@@ -1,6 +1,7 @@
 package com.kidosc.gallery.view;
 
 import android.app.FragmentManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -10,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.kidosc.gallery.base.BaseActivity;
 import com.kidosc.gallery.R;
+import com.kidosc.gallery.base.BaseActivity;
 import com.kidosc.gallery.global.Constants;
 
 import java.io.File;
@@ -31,6 +32,7 @@ public class PhotoActivity extends BaseActivity implements View.OnClickListener 
     private FragmentManager mFragmentManager;
     private StickerFragment mStickerFragment;
     private String mFilePath;
+    private boolean mFlag = true;
 
     @Override
     protected int getContentView() {
@@ -66,7 +68,11 @@ public class PhotoActivity extends BaseActivity implements View.OnClickListener 
                 mFragmentManager.beginTransaction().replace(R.id.ll, mStickerFragment).commit();
                 break;
             case R.id.share_btn:
-                Toast.makeText(this, "功能尚未开发", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                ComponentName componentName = new ComponentName("com.zeusis.csp.activity"
+                        , "com.zeusis.csp.activity.MyFamilyListActivity");
+                intent.setComponent(componentName);
+                startActivity(intent);
                 break;
             case R.id.delete_btn:
                 File file = new File(mFilePath);
@@ -76,23 +82,45 @@ public class PhotoActivity extends BaseActivity implements View.OnClickListener 
                 finish();
                 break;
             case R.id.iv1:
-                initStickerView();
+                handleStickerView();
                 break;
             default:
                 break;
         }
     }
 
-    private void initStickerView() {
+    private void handleStickerView() {
+        synchronized (this) {
+            if (mFlag) {
+                addStickerView();
+                mFlag = false;
+            } else {
+                removeStickerView();
+                mFlag = true;
+            }
+        }
+    }
+
+    private void addStickerView() {
         //make background black
         mImageView.setImageAlpha(100);
         mImageView.setBackgroundColor(Color.BLACK);
-        mImageView.setEnabled(false);
         //init sticker view
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         mStickerListView = layoutInflater.inflate(R.layout.list_detail, null).findViewById(R.id.rl_detail_list);
-        mContentViews.addView(mStickerListView);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams
+                (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        mContentViews.addView(mStickerListView, layoutParams);
         initListDetailView();
+    }
+
+    private void removeStickerView() {
+        //make background black
+        mImageView.setImageAlpha(255);
+        mImageView.setBackgroundColor(Color.TRANSPARENT);
+        //remove sticker view
+        mContentViews.removeView(mStickerListView);
     }
 
     private void initListDetailView() {

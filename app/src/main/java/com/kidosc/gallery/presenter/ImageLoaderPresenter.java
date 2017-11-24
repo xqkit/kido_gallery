@@ -35,8 +35,7 @@ public class ImageLoaderPresenter {
             , 0L, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>(), new ThreadFactory() {
         @Override
         public Thread newThread(@NonNull Runnable runnable) {
-            Thread getImageThread = new Thread(runnable);
-            return getImageThread;
+            return new Thread(runnable);
         }
     });
     private Handler handler = new Handler();

@@ -15,8 +15,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
-import com.kidosc.gallery.model.StickerPropertyModel;
 import com.kidosc.gallery.R;
+import com.kidosc.gallery.model.StickerPropertyModel;
+import com.kidosc.gallery.utils.Utils;
 
 /**
  * Desc:    Sticker View
@@ -136,7 +137,6 @@ public class StickerView extends ImageView {
         dm = getResources().getDisplayMetrics();
         mScreenWidth = dm.widthPixels;
         mScreenHeight = dm.heightPixels;
-
     }
 
     @Override
@@ -145,14 +145,15 @@ public class StickerView extends ImageView {
 
             float[] arrayOfFloat = new float[9];
             matrix.getValues(arrayOfFloat);
-            float f1 = 0.0F * arrayOfFloat[0] + 0.0F * arrayOfFloat[1] + arrayOfFloat[2];
-            float f2 = 0.0F * arrayOfFloat[3] + 0.0F * arrayOfFloat[4] + arrayOfFloat[5];
-            float f3 = arrayOfFloat[0] * this.mBitmap.getWidth() + 0.0F * arrayOfFloat[1] + arrayOfFloat[2];
-            float f4 = arrayOfFloat[3] * this.mBitmap.getWidth() + 0.0F * arrayOfFloat[4] + arrayOfFloat[5];
-            float f5 = 0.0F * arrayOfFloat[0] + arrayOfFloat[1] * this.mBitmap.getHeight() + arrayOfFloat[2];
-            float f6 = 0.0F * arrayOfFloat[3] + arrayOfFloat[4] * this.mBitmap.getHeight() + arrayOfFloat[5];
-            float f7 = arrayOfFloat[0] * this.mBitmap.getWidth() + arrayOfFloat[1] * this.mBitmap.getHeight() + arrayOfFloat[2];
-            float f8 = arrayOfFloat[3] * this.mBitmap.getWidth() + arrayOfFloat[4] * this.mBitmap.getHeight() + arrayOfFloat[5];
+            //size
+            float f1 = 0.0F * arrayOfFloat[0] + this.mBitmap.getHeight() / 5 * arrayOfFloat[1] + arrayOfFloat[2];
+            float f2 = 0.0F * arrayOfFloat[3] + this.mBitmap.getHeight() / 5 * arrayOfFloat[4] + arrayOfFloat[5];
+            float f3 = arrayOfFloat[0] * this.mBitmap.getWidth() + this.mBitmap.getHeight() / 5 * arrayOfFloat[1] + arrayOfFloat[2];
+            float f4 = arrayOfFloat[3] * this.mBitmap.getWidth() + this.mBitmap.getHeight() / 5 * arrayOfFloat[4] + arrayOfFloat[5];
+            float f5 = (float) (0.0F * arrayOfFloat[0] + arrayOfFloat[1] * this.mBitmap.getHeight() / 1.3 + arrayOfFloat[2]);
+            float f6 = (float) (0.0F * arrayOfFloat[3] + arrayOfFloat[4] * this.mBitmap.getHeight() / 1.3 + arrayOfFloat[5]);
+            float f7 = (float) (arrayOfFloat[0] * this.mBitmap.getWidth() + arrayOfFloat[1] * this.mBitmap.getHeight() / 1.3 + arrayOfFloat[2]);
+            float f8 = (float) (arrayOfFloat[3] * this.mBitmap.getWidth() + arrayOfFloat[4] * this.mBitmap.getHeight() / 1.3 + arrayOfFloat[5]);
 
             canvas.save();
             canvas.drawBitmap(mBitmap, matrix, null);
@@ -193,13 +194,9 @@ public class StickerView extends ImageView {
         }
     }
 
-    @Override
-    public void setImageResource(int resId) {
-        setBitmap(BitmapFactory.decodeResource(getResources(), resId));
-    }
-
-    public void setImageURI(String str) {
-        setBitmap(BitmapFactory.decodeFile(str));
+    public void setImageInt(int resId) {
+        Bitmap bitmap = Utils.getBitmapFromVectorDrawable(getContext(), resId);
+        setBitmap(bitmap);
     }
 
     public void setBitmap(Bitmap bitmap) {

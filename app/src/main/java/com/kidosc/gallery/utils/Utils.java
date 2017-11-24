@@ -3,11 +3,13 @@ package com.kidosc.gallery.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.support.v7.widget.AppCompatDrawableManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import java.io.File;
@@ -208,5 +210,22 @@ public class Utils {
      */
     private static String getAppDirPath(Context context) {
         return context.getFilesDir().getAbsolutePath() + "/" + APP_DIR + "/";
+    }
+
+    /**
+     * transfer vector drawable to bitmap
+     *
+     * @param context    context
+     * @param drawableId vector drawable's ID
+     * @return bitmap
+     */
+    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+        Drawable drawable = AppCompatDrawableManager.get().getDrawable(context, drawableId);
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 }
