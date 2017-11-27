@@ -228,4 +228,16 @@ public class Utils {
         drawable.draw(canvas);
         return bitmap;
     }
+
+    /**
+     * get local system version
+     * @return version
+     */
+    public static String getLocalSystemVersion() {
+        String version = android.os.Build.VERSION.RELEASE;
+        if (version == null) {
+            version = "";
+        }
+        return version;
+    }
 }

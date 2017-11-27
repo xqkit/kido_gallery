@@ -67,7 +67,9 @@ public class ImageLoaderPresenter {
             @Override
             public void run() {
                 BitmapFactory.Options opt = new BitmapFactory.Options();
+                //如果设置为true，不获取图片，不分配内存，但会返回图片的高度宽度信息
                 opt.inJustDecodeBounds = true;
+                //从文件读取图片
                 BitmapFactory.decodeFile(filePath, opt);
                 //get picture's original height & width
                 int picHeight = opt.outHeight;

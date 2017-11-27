@@ -12,8 +12,23 @@ import android.support.annotation.Nullable;
 
 public abstract class BaseActivity extends Activity {
 
+    private ActivityManager mActivityManager;
+
+    /**
+     * 初始化view
+     */
     protected abstract void initView();
+
+    /**
+     * 初始化数据
+     */
     protected abstract void initData();
+
+    /**
+     * 获取资源文件
+     *
+     * @return 布局文件ID
+     */
     protected abstract int getContentView();
 
     @Override
@@ -21,6 +36,8 @@ public abstract class BaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
         initView();
+        mActivityManager = ActivityManager.getInstance();
+        mActivityManager.addActivity(this);
     }
 
     @Override
@@ -29,4 +46,15 @@ public abstract class BaseActivity extends Activity {
         initData();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mActivityManager.removeActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mActivityManager.removeActivity(this);
+    }
 }
