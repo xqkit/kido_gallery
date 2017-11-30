@@ -16,7 +16,6 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import com.kidosc.gallery.R;
-import com.kidosc.gallery.model.StickerPropertyModel;
 import com.kidosc.gallery.utils.Utils;
 
 /**
@@ -381,52 +380,6 @@ public class StickerView extends ImageView {
             operationListener.onEdit(this);
         }
         return handled;
-    }
-
-    /**
-     * Calculate the Angle of the image and other attributes
-     *
-     * @param model model
-     * @return StickerPropertyModel
-     */
-    public StickerPropertyModel calculate(StickerPropertyModel model) {
-        float[] v = new float[9];
-        matrix.getValues(v);
-        // translation is simple
-        float tx = v[Matrix.MTRANS_X];
-        float ty = v[Matrix.MTRANS_Y];
-        Log.d(TAG, "tx : " + tx + " ty : " + ty);
-        // calculate real scale
-        float scalex = v[Matrix.MSCALE_X];
-        float skewy = v[Matrix.MSKEW_Y];
-        float rScale = (float) Math.sqrt(scalex * scalex + skewy * skewy);
-        Log.d(TAG, "rScale : " + rScale);
-        // calculate the degree of rotation
-        float rAngle = Math.round(Math.atan2(v[Matrix.MSKEW_X], v[Matrix.MSCALE_X]) * (180 / Math.PI));
-        Log.d(TAG, "rAngle : " + rAngle);
-
-        PointF localPointF = new PointF();
-        midDiagonalPoint(localPointF);
-
-        Log.d(TAG, " width  : " + (mBitmap.getWidth() * rScale) + " height " + (mBitmap.getHeight() * rScale));
-
-        float minX = localPointF.x;
-        float minY = localPointF.y;
-
-        Log.d(TAG, "midX : " + minX + " midY : " + minY);
-        model.setDegree((float) Math.toRadians(rAngle));
-        //TODO Percentage of screen
-        float percentWidth = (mBitmap.getWidth() * rScale) / mScreenWidth;
-        model.setScaling(percentWidth);
-        model.setxLocation(minX / mScreenWidth);
-        model.setyLocation(minY / mScreenWidth);
-        model.setStickerId(stickerId);
-        if (isHorizonMirror) {
-            model.setHorizonMirror(1);
-        } else {
-            model.setHorizonMirror(2);
-        }
-        return model;
     }
 
     /**

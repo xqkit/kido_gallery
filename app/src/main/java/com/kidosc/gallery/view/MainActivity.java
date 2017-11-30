@@ -24,8 +24,8 @@ public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ArrayList<String> mList = new ArrayList<>();
-    private WallAdapter mAdapter;
     private WallPresenter mWallPresenter;
+    private WallAdapter mWallAdapter;
 
     @Override
     protected void initView() {
@@ -33,8 +33,8 @@ public class MainActivity extends BaseActivity {
         GridView mPhotoWall = findViewById(R.id.photo_wall_grid);
         mWallPresenter = new WallPresenter();
         mList.addAll(mWallPresenter.getImagePaths());
-        mAdapter = new WallAdapter(this, mList);
-        mPhotoWall.setAdapter(mAdapter);
+        mWallAdapter = new WallAdapter(this, mList);
+        mPhotoWall.setAdapter(mWallAdapter);
         //init screen parameter
         Utils.initScreen(this);
         mPhotoWall.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,8 +58,8 @@ public class MainActivity extends BaseActivity {
         if (mList != null) {
             mList.clear();
             mList.addAll(mWallPresenter.getImagePaths());
-            mAdapter.refreshList(mList);
-            mAdapter.notifyDataSetChanged();
+            mWallAdapter.refreshList(mList);
+            mWallAdapter.notifyDataSetChanged();
         }
     }
 }

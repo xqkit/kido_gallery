@@ -41,7 +41,7 @@ public class StickerFragment extends BaseFragment {
         mList.add(R.drawable.sticker_01);
         mList.add(R.drawable.ic_sticker_02);
         mList.add(R.drawable.ic_sticker_03);
-        StickerAdapter stickerAdapter = new StickerAdapter(getActivity(), mList);
+        StickerAdapter stickerAdapter = new StickerAdapter(getActivity(),mList);
         mGridView.setAdapter(stickerAdapter);
 
         final FragmentManager fragmentManager = getActivity().getFragmentManager();
