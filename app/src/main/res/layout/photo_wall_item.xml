@@ -1,13 +1,27 @@
-<com.kidosc.gallery.view.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kidosc.gallery.view.customview.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/photo_wall_item_photo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ab" />
-</com.kidosc.gallery.view.SquareRelativeLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/photo_wall_item_photo"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ab" />
+
+        <ImageView
+            android:id="@+id/play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:src="@drawable/play" />
+    </FrameLayout>
+</com.kidosc.gallery.view.customview.SquareRelativeLayout>

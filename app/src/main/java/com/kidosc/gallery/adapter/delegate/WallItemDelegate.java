@@ -18,6 +18,9 @@ public class WallItemDelegate implements ItemViewDelegate<String> {
 
     @Override
     public void convert(ViewHolder holder, String s, int position) {
+//        if(s.endsWith("mp4")){
+//            holder.setVisible(R.id.play,true);
+//        }
         holder.setImageFilePath(R.id.photo_wall_item_photo, s);
     }
 

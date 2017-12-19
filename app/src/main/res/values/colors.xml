@@ -5,4 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="red_e73a3d">#e73a3d</color>
     <color name="white_fff">#fff</color>
+    <color name="sticker_blue">#FF2C9CFF</color>
+    <color name="transparent_bg">#D9000000</color>
+    <color name="black_bg">#000000</color>
+    <color name="grey_bg">#33FFFFFF</color>
 </resources>

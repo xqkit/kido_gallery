@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.util.LruCache;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.kidosc.gallery.R;
@@ -92,7 +93,9 @@ public class ImageLoaderPresenter {
                 }
                 //Regenerated into a pixel, scaled bitmap
                 opt.inJustDecodeBounds = false;
+                Log.d("frank", "opt.inSampleSize= " + opt.inSampleSize);
                 final Bitmap bmp = BitmapFactory.decodeFile(filePath, opt);
+                Log.d("frank", "bmp = " + bmp.toString());
                 //save map
                 imageCache.put(filePath, bmp);
                 handler.post(new Runnable() {

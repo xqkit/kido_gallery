@@ -1,29 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kidosc.gallery.view.pullzoom.PullZoomView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pzv"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <GridView
-        android:id="@+id/photo_wall_grid"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:horizontalSpacing="3dp"
-        android:numColumns="3"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="3dp" />
+        android:background="@color/black_bg"
+        android:orientation="vertical">
 
-    <!--<GridView-->
-    <!--android:id="@+id/photo_wall"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:columnWidth="90dip"-->
-    <!--android:gravity="center"-->
-    <!--android:numColumns="auto_fit"-->
-    <!--android:stretchMode="columnWidth"-->
-    <!--android:verticalSpacing="3dp"/>-->
+        <LinearLayout
+            android:id="@+id/header_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@color/black_bg"
+            android:orientation="horizontal"
+            android:tag="header">
 
-</LinearLayout>
+            <Button
+                android:id="@+id/take_photo_btn"
+                android:layout_width="71dp"
+                android:layout_height="71dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/btn_photograph_bg"
+                android:tag="zoom"
+                android:text="@string/take_photo"
+                android:textColor="#FFFFFFFF"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/take_video_btn"
+                android:layout_width="71dp"
+                android:layout_height="71dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/btn_videotape_bg"
+                android:tag="zoom"
+                android:text="@string/take_video"
+                android:textColor="#FFFFFFFF"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <com.kidosc.gallery.view.pullzoom.ExpandGridView
+            android:id="@+id/photo_wall_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_corner"
+            android:gravity="center"
+            android:horizontalSpacing="3dp"
+            android:numColumns="2"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:tag="content"
+            android:verticalSpacing="3dp" />
+
+        <include
+            android:id="@+id/empty_view"
+            layout="@layout/empty_view"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</com.kidosc.gallery.view.pullzoom.PullZoomView>

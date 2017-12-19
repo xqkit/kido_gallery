@@ -3,6 +3,9 @@ package com.kidosc.gallery.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+
+import com.kidosc.gallery.global.ActivityManager;
 
 /**
  * Desc:    base activity
@@ -10,7 +13,7 @@ import android.support.annotation.Nullable;
  * Date:    2017/11/22 13:52
  */
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity implements View.OnClickListener {
 
     private ActivityManager mActivityManager;
 
@@ -31,6 +34,22 @@ public abstract class BaseActivity extends Activity {
      */
     protected abstract int getContentView();
 
+    /**
+     * view点击事件
+     *
+     * @param v v
+     */
+    protected abstract void click(View v);
+
+    /**
+     * 拍照
+     */
+    protected int PHOTO = 0;
+    /**
+     * 录像
+     */
+    protected int VIDEO = 1;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +63,11 @@ public abstract class BaseActivity extends Activity {
     protected void onResume() {
         super.onResume();
         initData();
+    }
+
+    @Override
+    public void onClick(View v) {
+        click(v);
     }
 
     @Override

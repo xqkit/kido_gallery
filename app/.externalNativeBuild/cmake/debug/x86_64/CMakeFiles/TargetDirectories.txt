@@ -1,0 +1,3 @@
+D:/KidoGallery/app/.externalNativeBuild/cmake/debug/x86_64/CMakeFiles/rebuild_cache.dir
+D:/KidoGallery/app/.externalNativeBuild/cmake/debug/x86_64/CMakeFiles/MagicBeautify.dir
+D:/KidoGallery/app/.externalNativeBuild/cmake/debug/x86_64/CMakeFiles/edit_cache.dir

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/black_bg"
+    android:layout_marginTop="10dp">
+
+    <Button
+        android:id="@+id/take_photo_btn"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/btn_photograph_bg"
+        android:text="@string/take_photo"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/take_video_btn"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/btn_videotape_bg"
+        android:text="@string/take_video"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp" />
+
+</LinearLayout>

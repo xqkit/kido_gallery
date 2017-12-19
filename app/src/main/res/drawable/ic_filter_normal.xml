@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <group>
+        <group
+                android:translateX="-51.000000"
+                android:translateY="-125.000000">
+            <group
+                    android:translateX="51.000000"
+                    android:translateY="125.000000">
+                <group>
+                    <group>
+                        <path
+                            android:fillType="evenOdd"
+                            android:strokeWidth="1"
+                            android:pathData="M 0 0 H 24 V 24 H 0 V 0 Z" />
+                        <group
+                                android:translateX="3.250000"
+                                android:translateY="3.250000">
+                            <path
+                                android:fillColor="#FFFFFF"
+                                android:fillAlpha="0.8"
+                                android:fillType="evenOdd"
+                                android:strokeWidth="1"
+                                android:pathData="M 8.75 0 C 11.3859044863 0 13.52272727 2.16213706059 13.52272727 4.82926829 C 13.52272727 7.49639951941 11.3859044863 9.65853658 8.75 9.65853658 C 6.11409551368 9.65853658 3.97727273 7.49639951941 3.97727273 4.82926829 C 3.97727273 2.16213706059 6.11409551368 0 8.75 0 Z" />
+                            <path
+                                android:fillColor="#FFFFFF"
+                                android:fillAlpha="0.6"
+                                android:fillType="evenOdd"
+                                android:strokeWidth="1"
+                                android:pathData="M 4.77272727 6.84146341 C 7.40863175632 6.84146341 9.54545454 9.00360047059 9.54545454 11.6707317 C 9.54545454 14.3378629294 7.40863175632 16.49999999 4.77272727 16.49999999 C 2.13682278368 16.49999999 0 14.3378629294 0 11.6707317 C 0 9.00360047059 2.13682278368 6.84146341 4.77272727 6.84146341 Z" />
+                            <path
+                                android:fillColor="#FFFFFF"
+                                android:fillAlpha="0.4"
+                                android:fillType="evenOdd"
+                                android:strokeWidth="1"
+                                android:pathData="M 12.7272727 6.84146341 C 15.3631771863 6.84146341 17.49999997 9.00360047059 17.49999997 11.6707317 C 17.49999997 14.3378629294 15.3631771863 16.49999999 12.7272727 16.49999999 C 10.0913682137 16.49999999 7.95454543 14.3378629294 7.95454543 11.6707317 C 7.95454543 9.00360047059 10.0913682137 6.84146341 12.7272727 6.84146341 Z" />
+                        </group>
+                    </group>
+                </group>
+            </group>
+        </group>
+    </group>
+</vector>

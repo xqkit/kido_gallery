@@ -18,8 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.kidosc.gallery.R;
 import com.kidosc.gallery.presenter.ImageLoaderPresenter;
 import com.kidosc.gallery.utils.Utils;
+
+import java.io.File;
 
 /**
  * Desc:    Common view holder
@@ -28,6 +32,7 @@ import com.kidosc.gallery.utils.Utils;
  */
 
 public class ViewHolder {
+    private static final String TAG = ViewHolder.class.getSimpleName();
     private SparseArray<View> mViews;
     protected int mPosition;
     private View mConvertView;
@@ -161,7 +166,7 @@ public class ViewHolder {
 
     public ViewHolder setVisible(int viewId, boolean visible) {
         View view = getView(viewId);
-        view.setVisibility(visible ? View.VISIBLE : View.GONE);
+        view.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
         return this;
     }
 
@@ -173,8 +178,16 @@ public class ViewHolder {
 
     public ViewHolder setImageFilePath(int viewId, String filePath) {
         ImageView view = getView(viewId);
-        view.setTag(filePath);
-        mLoader.loadImage(4, filePath, view);
+//        view.setTag(filePath);
+        File file = new File(filePath);
+//        Log.d(TAG, "URI = " + Utils.getImageContentUri(mContext, filePath));
+        Glide.with(mContext).load(file).placeholder(R.drawable.ab);
+        if (filePath.endsWith("mp4")) {
+            Glide.with(mContext).load(file).thumbnail(0.1f).into(view);
+            return this;
+        }
+        Glide.with(mContext).load(file).into(view);
+//        mLoader.loadImage(4, filePath, view);
         return this;
     }
 

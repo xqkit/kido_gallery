@@ -1,4 +1,4 @@
-package com.kidosc.gallery.base;
+package com.kidosc.gallery.global;
 
 import android.app.Activity;
 import android.content.Context;

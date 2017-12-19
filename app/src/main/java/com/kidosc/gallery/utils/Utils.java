@@ -1,21 +1,35 @@
 package com.kidosc.gallery.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatDrawableManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Desc:    Utils
@@ -231,6 +245,7 @@ public class Utils {
 
     /**
      * get local system version
+     *
      * @return version
      */
     public static String getLocalSystemVersion() {
@@ -239,5 +254,90 @@ public class Utils {
             version = "";
         }
         return version;
+    }
+
+    /**
+     * 获取输出的media文件
+     *
+     * @return 文件
+     */
+    public static File getOutputMediaFile() {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "Camera");
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINESE).format(new Date());
+        Log.d("frank", "getOutputMediaFile timeStamp :" + timeStamp);
+        return new File(mediaStorageDir.getPath() + File.separator +
+                "IMG_" + timeStamp + ".jpg");
+    }
+
+    /**
+     * 获取输出的media文件
+     *
+     * @return 文件
+     */
+    public static File getOutputMovie() {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_MOVIES), "Camera");
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINESE).format(new Date());
+        Log.d("frank", "getOutputMediaFile timeStamp :" + timeStamp);
+        return new File(mediaStorageDir.getPath() + File.separator + timeStamp + ".mp4");
+    }
+
+
+    /**
+     * 将图片路径转换为bitmap
+     *
+     * @param path 图片路径
+     * @param w    图片宽
+     * @param h    图片长
+     * @return 图片
+     */
+    public static Bitmap convertToBitmap(String path, int w, int h) {
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        // 设置为ture只获取图片大小
+        opts.inJustDecodeBounds = true;
+        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        // 返回为空
+        BitmapFactory.decodeFile(path, opts);
+        int width = opts.outWidth;
+        int height = opts.outHeight;
+        float scaleWidth = 0.f, scaleHeight = 0.f;
+        if (width > w || height > h) {
+            // 缩放
+            scaleWidth = ((float) width) / w;
+            scaleHeight = ((float) height) / h;
+        }
+        opts.inJustDecodeBounds = false;
+        float scale = Math.max(scaleWidth, scaleHeight);
+        opts.inSampleSize = (int) scale;
+        WeakReference<Bitmap> weak = new WeakReference<Bitmap>(BitmapFactory.decodeFile(path, opts));
+        return Bitmap.createScaledBitmap(weak.get(), w, h, true);
+    }
+
+    /**
+     * 将时间转换成 00:00 格式
+     *
+     * @param time 时间
+     * @return 结果
+     */
+    @SuppressLint("DefaultLocale")
+    @NonNull
+    public static String timeCalculate(long time) {
+        long minutesu, secondsu;
+        String daysT = "", restT = "";
+        minutesu = (Math.round(time) / 60);
+        secondsu = Math.round(time) % 60;
+        restT = String.format("%02d:%02d", minutesu, secondsu);
+        return daysT + restT;
     }
 }
